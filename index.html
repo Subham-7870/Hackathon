@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indian Railways - AI Automatic Block Planning Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo-container">
+      <div class="railway-emblem">IR</div>
+      <div>
+        <h1>Indian Railways - Block Planning Control Center</h1>
+        <p class="subtitle">Problem Statement 26027: AI-Powered Automatic Integrated Block Planning</p>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button id="optimizeBtn" class="btn-primary">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text">Optimize Schedule</span>
+        <div id="btnSpinner" class="spinner hidden"></div>
+      </button>
+      <button id="resetBtn" class="btn-secondary">Reset Mock Data</button>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+    <!-- Stats Bar -->
+    <section class="stats-banner">
+      <div class="stat-card">
+        <span class="stat-label">Pending Requests</span>
+        <span id="statPending" class="stat-value text-amber">10</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Timetable Windows</span>
+        <span id="statWindows" class="stat-value text-blue">5</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Optimized Blocks</span>
+        <span id="statBlocks" class="stat-value text-green">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Integrated Multi-Dept Efficiency</span>
+        <span id="statEfficiency" class="stat-value text-purple">0%</span>
+      </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <div class="content-split">
+      <!-- Left Panel: Pending Requests -->
+      <section class="panel panel-left">
+        <div class="panel-header">
+          <h2>Table 1: Maintenance Requests</h2>
+          <span class="badge badge-info">Source Data</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Department</th>
+                <th>Sector</th>
+                <th>Duration</th>
+                <th>Priority</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="requestsTableBody">
+              <!-- Dynamically Populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Right Panel: Timetables & AI Output -->
+      <section class="panel panel-right">
+        <div class="panel-header">
+          <h2>Table 3: Optimized Integrated Blocks</h2>
+          <span id="blockBadge" class="badge badge-warning">Awaiting Optimization</span>
+        </div>
+        
+        <!-- Live Execution Console -->
+        <div id="executionConsole" class="console-box hidden">
+          <div class="console-header">🤖 Antigravity Webhook Execution Logs</div>
+          <div id="consoleLogs" class="console-body"></div>
+        </div>
+
+        <!-- Output Blocks Gantt / Cards -->
+        <div id="blocksContainer" class="blocks-feed">
+          <div class="empty-state">
+            <div class="empty-icon">🚆</div>
+            <h3>No Scheduled Blocks Generated Yet</h3>
+            <p>Click "Optimize Schedule" above to run the AI grouping model on pending requests.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
