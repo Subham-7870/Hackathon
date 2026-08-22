@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Railway Block Planning Database Schemas",
+  "description": "Database Schema definitions for Indian Railways Problem Statement 26027: AI-Powered Automatic Block Planning.",
+  "definitions": {
+    "Table_1_Maintenance_Requests": {
+      "type": "object",
+      "title": "Maintenance Requests",
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "description": "Unique identifier for the maintenance request (e.g., REQ-TRK-001)."
+        },
+        "department": {
+          "type": "string",
+          "enum": ["Track", "Signal", "Traction"],
+          "description": "Originating department requesting block time."
+        },
+        "location_sector": {
+          "type": "string",
+          "description": "Geographical section/sector of the railway line (e.g., SEC-NDLS-CNB-01)."
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 15,
+          "description": "Required duration of maintenance in minutes."
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"],
+          "description": "Urgency/Priority level of the maintenance work."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Scheduled", "Cancelled"],
+          "description": "Current processing status of the request."
+        }
+      },
+      "required": ["request_id", "department", "location_sector", "duration_minutes", "priority", "status"]
+    },
+    "Table_2_Train_Timetable": {
+      "type": "object",
+      "title": "Train Timetable & Traffic Windows",
+      "properties": {
+        "timetable_id": {
+          "type": "string",
+          "description": "Unique identifier for the timetable window."
+        },
+        "location_sector": {
+          "type": "string",
+          "description": "Geographical section/sector corresponding to the track."
+        },
+        "time_slot": {
+          "type": "object",
+          "properties": {
+            "start_time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Start of the available window (ISO 8601 UTC)."
+            },
+            "end_time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "End of the available window (ISO 8601 UTC)."
+            },
+            "available_duration_minutes": {
+              "type": "integer",
+              "description": "Total length of the window in minutes."
+            }
+          },
+          "required": ["start_time", "end_time", "available_duration_minutes"]
+        },
+        "traffic_status": {
+          "type": "string",
+          "enum": ["Clear Window", "High Traffic", "Blocked"],
+          "description": "Availability status of the line segment."
+        }
+      },
+      "required": ["timetable_id", "location_sector", "time_slot", "traffic_status"]
+    },
+    "Table_3_Optimized_Blocks": {
+      "type": "object",
+      "title": "Optimized Integrated Maintenance Blocks",
+      "properties": {
+        "block_id": {
+          "type": "string",
+          "description": "Unique identifier for the grouped/optimized block."
+        },
+        "location_sector": {
+          "type": "string",
+          "description": "Geographical section/sector where block is granted."
+        },
+        "scheduled_time_window": {
+          "type": "object",
+          "properties": {
+            "start_time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Scheduled start time for the consolidated block."
+            },
+            "end_time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Scheduled end time for the consolidated block."
+            }
+          },
+          "required": ["start_time", "end_time"]
+        },
+        "assigned_request_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Maintenance Request IDs bundled into this block."
+        },
+        "total_block_duration_minutes": {
+          "type": "integer",
+          "description": "Total sum of durations of all assigned requests."
+        },
+        "departments_involved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Unique departments participating in this integrated block."
+        }
+      },
+      "required": ["block_id", "location_sector", "scheduled_time_window", "assigned_request_ids", "total_block_duration_minutes", "departments_involved"]
+    }
+  }
+}
