@@ -1,32 +1,35 @@
-# Indian Railways Problem Statement 26027: AI-Powered Automatic Block Planning
+# Indian Railways Problem Statement 26027: AI-Powered Automatic Block Planning (v1.0.0 Release)
 
-This repository contains the Data Architecture, JSON Schemas, Mock Data Payloads, and API System Prompt for an AI-powered Automatic Block Planning application designed for **Indian Railways**.
+![Release v1.0.0](https://img.shields.io/badge/Release-v1.0.0-blue.svg)
+![Status](https://img.shields.io/badge/Backend-Verified-success.svg)
 
-## Problem Summary
-Indian Railways operates high-density corridors where track maintenance requests originate independently from three distinct departments:
-1. **Track Maintenance (Engineering)**
-2. **Signal & Telecommunication (S&T)**
-3. **Traction / Overhead Equipment (TRD/OHE)**
-
-Traditionally, uncoordinated maintenance requests cause excessive line block grants, increased train detention, and reduced section capacity. This project designs the data structures and LLM optimization prompt to group multi-department maintenance requests geographically into single consolidated time blocks based on live train timetables.
+This repository contains the complete **v1.0.0 Release** for Indian Railways Problem Statement 26027: **"AI-Powered Automatic Block Planning"**, built for the Antigravity no-code platform with Google Gemini REST API integration.
 
 ---
 
-## Repository Structure
+## 🚀 What's Included in v1.0.0
 
-- [`schema.json`](file:///home/Pradyut/Documents/Hackathon/schema.json): Formal JSON Schemas for:
-  - `Table_1_Maintenance_Requests`
-  - `Table_2_Train_Timetable`
-  - `Table_3_Optimized_Blocks`
-- [`mock_data.json`](file:///home/Pradyut/Documents/Hackathon/mock_data.json): Realistic mock dataset containing 10 multi-department maintenance requests and 5 train timetable clear windows.
-- [`system_prompt.md`](file:///home/Pradyut/Documents/Hackathon/system_prompt.md): The exact, strict instructional prompt for the LLM API integration inside the Antigravity no-code platform.
+- 📊 **[`schema.json`](file:///home/Pradyut/Documents/Hackathon/schema.json)**: JSON schemas for `Table_1_Maintenance_Requests`, `Table_2_Train_Timetable`, and `Table_3_Optimized_Blocks`.
+- 📁 **[`mock_data.json`](file:///home/Pradyut/Documents/Hackathon/mock_data.json)**: Mock dataset featuring 10 departmental requests (Track, Signal, Traction) and 5 timetable clear windows.
+- ⚡ **[`system_prompt.md`](file:///home/Pradyut/Documents/Hackathon/system_prompt.md)**: Strict optimization prompt enforcing multi-department grouping rules.
+- 🤖 **[`api_integration.json`](file:///home/Pradyut/Documents/Hackathon/api_integration.json)**: Production JSON POST body template configured with Gemini Structured Output Schema (`response_mime_type: "application/json"`).
+- 🧪 **[`dry_run.js`](file:///home/Pradyut/Documents/Hackathon/dry_run.js)**: Automated backend test runner verifying 100% multi-department block consolidation.
+- 💻 **[`index.html`](file:///home/Pradyut/Documents/Hackathon/index.html) / [`app.js`](file:///home/Pradyut/Documents/Hackathon/app.js) / [`styles.css`](file:///home/Pradyut/Documents/Hackathon/styles.css)**: Interactive Web Dashboard prototype featuring a live **"Optimize Schedule"** button and visual output cards.
 
 ---
 
-## Sample Data Overview
+## 🛠️ Quick Start & Verification
 
-### Geographical Overlaps (Multi-Department Grouping)
-- **Sector `SEC-NDLS-CNB-01`**: Bundles Track (`REQ-TRK-001`), Signal (`REQ-SIG-001`), and Traction (`REQ-TRC-001`) into a single 165-minute window within a 240-minute clear window (`TT-001`).
-- **Sector `SEC-HWH-BWN-02`**: Bundles Track (`REQ-TRK-002`) and Traction (`REQ-TRC-002`) into a 165-minute window (`TT-002`).
-- **Sector `SEC-BCT-BRC-03`**: Bundles Signal (`REQ-SIG-002`) and Track (`REQ-TRK-003`) into a 180-minute window (`TT-003`).
+### 1. Run the Backend Test Script
+```bash
+node dry_run.js
+```
 
+### 2. View the Live Dashboard Prototype
+Open `index.html` in any modern web browser or launch a local dev server.
+
+---
+
+## 🏷️ Release Tags
+- **`v1` / `v1.0.0`**: Permanent GitHub tag for the complete v1 release.
+  - Remote URL: [`https://github.com/Subham-7870/Hackathon/tree/v1.0.0`](https://github.com/Subham-7870/Hackathon/tree/v1.0.0)
