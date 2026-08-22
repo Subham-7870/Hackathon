@@ -1,0 +1,73 @@
+{
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "payload_template": {
+    "system_instruction": {
+      "parts": [
+        {
+          "text": "You are an expert AI Railway Logistics & Maintenance Scheduler for Indian Railways. Your role is to perform Automatic Integrated Block Planning by consolidating disconnected maintenance requests from Track, Signal, and Traction departments into single, unified geographic time blocks."
+        }
+      ]
+    },
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": "Perform Automatic Block Planning on the following incoming datasets:\n\nTable_1_Maintenance_Requests (Pending Only):\n${Table_1_Pending_Requests_JSON}\n\nTable_2_Train_Timetable:\n${Table_2_Timetable_JSON}\n\nGroup requests sharing the same location_sector into a single block if their combined duration fits within available_duration_minutes of a 'Clear Window' slot. Return ONLY the JSON array matching Table_3_Optimized_Blocks."
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0.1,
+      "response_mime_type": "application/json",
+      "response_schema": {
+        "type": "ARRAY",
+        "description": "List of consolidated and optimized railway maintenance blocks.",
+        "items": {
+          "type": "OBJECT",
+          "properties": {
+            "block_id": {
+              "type": "STRING",
+              "description": "Unique block ID format BLK-YYYYMMDD-XXX"
+            },
+            "location_sector": {
+              "type": "STRING",
+              "description": "Sector code e.g. SEC-NDLS-CNB-01"
+            },
+            "scheduled_time_window": {
+              "type": "OBJECT",
+              "properties": {
+                "start_time": { "type": "STRING" },
+                "end_time": { "type": "STRING" }
+              },
+              "required": ["start_time", "end_time"]
+            },
+            "assigned_request_ids": {
+              "type": "ARRAY",
+              "items": { "type": "STRING" }
+            },
+            "total_block_duration_minutes": {
+              "type": "INTEGER"
+            },
+            "departments_involved": {
+              "type": "ARRAY",
+              "items": { "type": "STRING" }
+            }
+          },
+          "required": [
+            "block_id",
+            "location_sector",
+            "scheduled_time_window",
+            "assigned_request_ids",
+            "total_block_duration_minutes",
+            "departments_involved"
+          ]
+        }
+      }
+    }
+  }
+}

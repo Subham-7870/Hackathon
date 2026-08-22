@@ -29,3 +29,4 @@ Traditionally, uncoordinated maintenance requests cause excessive line block gra
 - **Sector `SEC-NDLS-CNB-01`**: Bundles Track (`REQ-TRK-001`), Signal (`REQ-SIG-001`), and Traction (`REQ-TRC-001`) into a single 165-minute window within a 240-minute clear window (`TT-001`).
 - **Sector `SEC-HWH-BWN-02`**: Bundles Track (`REQ-TRK-002`) and Traction (`REQ-TRC-002`) into a 165-minute window (`TT-002`).
 - **Sector `SEC-BCT-BRC-03`**: Bundles Signal (`REQ-SIG-002`) and Track (`REQ-TRK-003`) into a 180-minute window (`TT-003`).
+
