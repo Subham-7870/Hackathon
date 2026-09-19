@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RailBlock Planner | Integrated Maintenance Planning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand-lockup">
+        <div class="railway-emblem" aria-hidden="true">IR</div>
+        <div>
+          <p class="eyebrow">Indian Railways · Integrated maintenance</p>
+          <h1>RailBlock Planner</h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="schedule-date">
+          <span class="schedule-date-label">Planning date</span>
+          <strong>23 Aug 2026 · UTC</strong>
+        </div>
+        <button id="resetBtn" class="btn-secondary" type="button">Reset plan</button>
+        <button id="optimizeBtn" class="btn-primary" type="button">
+          <span id="btnText">Build optimized plan</span>
+          <span id="btnSpinner" class="spinner hidden" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="overview-intro" aria-labelledby="workspace-title">
+        <div>
+          <p class="eyebrow accent-eyebrow">Planning workspace</p>
+          <h2 id="workspace-title">Bring maintenance work together, without disrupting train operations.</h2>
+          <p class="intro-copy">Review outstanding work, confirm safe timetable windows, then create coordinated blocks that make the best use of each closure.</p>
+        </div>
+        <div class="ready-pill" id="planState" role="status">
+          <span class="ready-dot" aria-hidden="true"></span>
+          <span>Ready to plan</span>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Planning summary">
+        <article class="stat-card">
+          <span class="stat-label">Maintenance requests</span>
+          <strong id="statPending" class="stat-value">10</strong>
+          <span id="pendingHelper" class="stat-helper">Awaiting coordination</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Clear timetable windows</span>
+          <strong id="statWindows" class="stat-value stat-blue">5</strong>
+          <span class="stat-helper">Across 5 active sectors</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Departments involved</span>
+          <strong id="statDepartments" class="stat-value stat-violet">3</strong>
+          <span class="stat-helper">Track, Signal &amp; Traction</span>
+        </article>
+        <article class="stat-card stat-card-highlight">
+          <span class="stat-label">Optimized plan</span>
+          <strong id="statBlocks" class="stat-value stat-green">Not built</strong>
+          <span id="planHelper" class="stat-helper">Build a plan to see the outcome</span>
+        </article>
+      </section>
+
+      <section class="workflow-card" aria-labelledby="workflow-title">
+        <div class="workflow-heading">
+          <p class="eyebrow">What the planner checks</p>
+          <h2 id="workflow-title">A simple path from source data to a workable block plan.</h2>
+        </div>
+        <ol class="workflow-steps">
+          <li>
+            <span class="step-number">01</span>
+            <div>
+              <h3>Match the location</h3>
+              <p>Requests are grouped only when they belong to the same rail sector.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <div>
+              <h3>Protect the timetable</h3>
+              <p>Each group is placed inside its corresponding clear operating window.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <div>
+              <h3>Coordinate departments</h3>
+              <p>Track, Signal and Traction work are combined wherever capacity allows.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section-heading" aria-labelledby="inputs-title">
+        <div>
+          <p class="eyebrow">Source data</p>
+          <h2 id="inputs-title">Planning inputs</h2>
+          <p>These are the records the planner uses to build each recommended block.</p>
+        </div>
+        <div class="source-key">
+          <span class="key-dot key-pending"></span> Pending work
+          <span class="key-dot key-window"></span> Clear operating window
+        </div>
+      </section>
+
+      <section class="inputs-grid" aria-label="Planning input data">
+        <article class="panel requests-panel">
+          <div class="panel-header panel-header-stack-mobile">
+            <div>
+              <div class="panel-title-row">
+                <h3>Maintenance requests</h3>
+                <span id="requestsCount" class="count-badge">10 records</span>
+              </div>
+              <p>Outstanding work that needs a safe maintenance block.</p>
+            </div>
+            <div class="filter-group" aria-label="Filter requests by department">
+              <button class="filter-chip is-active" type="button" data-department="All">All</button>
+              <button class="filter-chip" type="button" data-department="Track">Track</button>
+              <button class="filter-chip" type="button" data-department="Signal">Signal</button>
+              <button class="filter-chip" type="button" data-department="Traction">Traction</button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">Request</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Sector</th>
+                  <th scope="col">Work</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="requestsTableBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel timetable-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title-row">
+                <h3>Clear timetable windows</h3>
+                <span class="count-badge count-badge-blue">5 windows</span>
+              </div>
+              <p>Available closures that define the safe scheduling capacity.</p>
+            </div>
+          </div>
+          <div id="timetableContainer" class="timetable-list"></div>
+        </article>
+      </section>
+
+      <section class="results-section" aria-labelledby="results-title">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow accent-eyebrow">Recommended outcome</p>
+            <h2 id="results-title">Optimized work blocks</h2>
+            <p id="resultsDescription">Build the plan to see how work can be combined within each clear timetable window.</p>
+          </div>
+          <div id="blockBadge" class="result-badge result-badge-waiting">Awaiting plan</div>
+        </div>
+        <div id="blocksContainer" class="blocks-feed">
+          <div class="empty-state">
+            <div class="empty-state-mark" aria-hidden="true">01</div>
+            <h3>Your recommended blocks will appear here.</h3>
+            <p>The plan will show the sector, chosen time window, available capacity and coordinated teams for every block.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>RailBlock Planner</span>
+      <span>Uses maintenance requests and clear timetable windows to create coordinated block recommendations.</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
