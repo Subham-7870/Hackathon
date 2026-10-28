@@ -1,5 +1,20 @@
 {
-  "devDependencies": {
-    "@types/react": "^19.2.18"
-  }
+  "name": "sthitishodhana-railway-optimizer",
+  "version": "2.5.0",
+  "private": true,
+  "description": "SthitiShodhana (स्थितिशोधन) — Autonomous Train Dispatching & Dynamic Maintenance Block Optimizer for Indian Railways (SIH #26027)",
+  "scripts": {
+    "build": "echo 'SthitiShodhana static assets ready for deployment'",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "indian-railways",
+    "sthitishodhana",
+    "train-dispatching",
+    "maintenance-optimizer",
+    "sih26027",
+    "kavach",
+    "rail-telemetry"
+  ],
+  "author": "Team Trailblazer (ID: 15)"
 }

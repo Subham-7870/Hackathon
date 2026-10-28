@@ -1,0 +1,381 @@
+{
+  "metrics": {
+    "total_requests_processed": 10,
+    "requests_allocated": 10,
+    "shadow_blocks_created": 4,
+    "corridor_closure_hours_saved": 3.08,
+    "superfast_train_delay_minutes": 0,
+    "express_train_delay_minutes": 12,
+    "freight_trains_looped": 2,
+    "track_capacity_gain_percent": 30.0,
+    "solver_execution_time_seconds": 0.117,
+    "solver_status": "OPTIMAL"
+  },
+  "solved_blocks": [
+    {
+      "block_id": "BLK-NDLS-CNB-01-OPT",
+      "location_sector": "SEC-NDLS-CNB-01",
+      "track_line": "Down Main",
+      "start_time_offset_minutes": 30,
+      "end_time_offset_minutes": 140,
+      "start_time_iso": "2026-08-23T00:30:00Z",
+      "end_time_iso": "2026-08-23T02:20:00Z",
+      "total_block_duration_minutes": 110,
+      "effective_work_duration_minutes": 90,
+      "available_window_duration_minutes": 240,
+      "capacity_utilized_percent": 45.8,
+      "departments_involved": [
+        "Traction",
+        "Track",
+        "Signal"
+      ],
+      "assigned_requests": [
+        {
+          "request_id": "REQ-TRK-101",
+          "department": "Track",
+          "work_description": "09-3X Dynamic Tamping Express - Track geometry correction & ballast stabilization",
+          "duration_minutes": 90,
+          "machine_required": "09-3X Tamping Express"
+        },
+        {
+          "request_id": "REQ-SIG-101",
+          "department": "Signal",
+          "work_description": "Electronic Interlocking (EI) Point Machine #14B motor overhaul & track circuit insulation testing",
+          "duration_minutes": 45,
+          "machine_required": "S&T Testing Kit"
+        },
+        {
+          "request_id": "REQ-TRC-101",
+          "department": "Traction",
+          "work_description": "25 kV AC OHE contact wire height adjustment & polymer insulator high-pressure washing",
+          "duration_minutes": 60,
+          "machine_required": "4-Wheeler Tower Wagon #TW-88"
+        }
+      ],
+      "is_shadow_block": true,
+      "ohe_power_isolated": true,
+      "elementary_section": "ES-NDLS-201",
+      "post_block_speed_restriction_kmh": 30,
+      "controller_approved": false
+    },
+    {
+      "block_id": "BLK-HWH-BWN-02-OPT",
+      "location_sector": "SEC-HWH-BWN-02",
+      "track_line": "Down Main",
+      "start_time_offset_minutes": 30,
+      "end_time_offset_minutes": 170,
+      "start_time_iso": "2026-08-23T00:30:00Z",
+      "end_time_iso": "2026-08-23T02:50:00Z",
+      "total_block_duration_minutes": 140,
+      "effective_work_duration_minutes": 120,
+      "available_window_duration_minutes": 210,
+      "capacity_utilized_percent": 66.7,
+      "departments_involved": [
+        "Traction",
+        "Track"
+      ],
+      "assigned_requests": [
+        {
+          "request_id": "REQ-TRK-201",
+          "department": "Track",
+          "work_description": "Ballast Cleaning Machine (BCM) shoulder screening & sleeper replenishment",
+          "duration_minutes": 120,
+          "machine_required": "Plasser BCM-300"
+        },
+        {
+          "request_id": "REQ-TRC-201",
+          "department": "Traction",
+          "work_description": "OHE Catenary dropper replacement and neutral section inspection",
+          "duration_minutes": 75,
+          "machine_required": "Tower Wagon #TW-42"
+        }
+      ],
+      "is_shadow_block": true,
+      "ohe_power_isolated": true,
+      "elementary_section": "ES-HWH-201",
+      "post_block_speed_restriction_kmh": 30,
+      "controller_approved": false
+    },
+    {
+      "block_id": "BLK-BCT-BRC-03-OPT",
+      "location_sector": "SEC-BCT-BRC-03",
+      "track_line": "Down Main",
+      "start_time_offset_minutes": 30,
+      "end_time_offset_minutes": 160,
+      "start_time_iso": "2026-08-23T00:30:00Z",
+      "end_time_iso": "2026-08-23T02:40:00Z",
+      "total_block_duration_minutes": 130,
+      "effective_work_duration_minutes": 110,
+      "available_window_duration_minutes": 210,
+      "capacity_utilized_percent": 61.9,
+      "departments_involved": [
+        "Track",
+        "Signal"
+      ],
+      "assigned_requests": [
+        {
+          "request_id": "REQ-TRK-301",
+          "department": "Track",
+          "work_description": "Continuous Tamping Machine CSM #903 ballast packing & alignment",
+          "duration_minutes": 110,
+          "machine_required": "CSM Tamping Machine"
+        },
+        {
+          "request_id": "REQ-SIG-301",
+          "department": "Signal",
+          "work_description": "Multi-Section Digital Axle Counter (MSDAC) transducer reset & cable insulation check",
+          "duration_minutes": 50,
+          "machine_required": "MSDAC Calibration Unit"
+        }
+      ],
+      "is_shadow_block": true,
+      "ohe_power_isolated": false,
+      "elementary_section": null,
+      "post_block_speed_restriction_kmh": 30,
+      "controller_approved": false
+    },
+    {
+      "block_id": "BLK-MAS-BZA-01-OPT",
+      "location_sector": "SEC-MAS-BZA-01",
+      "track_line": "Down Main",
+      "start_time_offset_minutes": 30,
+      "end_time_offset_minutes": 110,
+      "start_time_iso": "2026-08-23T00:30:00Z",
+      "end_time_iso": "2026-08-23T01:50:00Z",
+      "total_block_duration_minutes": 80,
+      "effective_work_duration_minutes": 60,
+      "available_window_duration_minutes": 150,
+      "capacity_utilized_percent": 53.3,
+      "departments_involved": [
+        "Traction",
+        "Signal"
+      ],
+      "assigned_requests": [
+        {
+          "request_id": "REQ-TRC-401",
+          "department": "Traction",
+          "work_description": "Bracket assembly renewal & cantilever insulator greasing",
+          "duration_minutes": 60,
+          "machine_required": "8-Wheeler DETC Tower Car"
+        },
+        {
+          "request_id": "REQ-SIG-401",
+          "department": "Signal",
+          "work_description": "Automatic Block Signalling (ABS) Signal lamp unit optical alignment",
+          "duration_minutes": 35,
+          "machine_required": "Signal Diagnostic Tool"
+        }
+      ],
+      "is_shadow_block": true,
+      "ohe_power_isolated": true,
+      "elementary_section": "ES-MAS-201",
+      "post_block_speed_restriction_kmh": 110,
+      "controller_approved": false
+    },
+    {
+      "block_id": "BLK-SBC-MYS-01-OPT",
+      "location_sector": "SEC-SBC-MYS-01",
+      "track_line": "Down Main",
+      "start_time_offset_minutes": 30,
+      "end_time_offset_minutes": 115,
+      "start_time_iso": "2026-08-23T00:30:00Z",
+      "end_time_iso": "2026-08-23T01:55:00Z",
+      "total_block_duration_minutes": 85,
+      "effective_work_duration_minutes": 70,
+      "available_window_duration_minutes": 120,
+      "capacity_utilized_percent": 70.8,
+      "departments_involved": [
+        "Track"
+      ],
+      "assigned_requests": [
+        {
+          "request_id": "REQ-TRK-501",
+          "department": "Track",
+          "work_description": "Turnout rail grinding and tongue rail lubricator maintenance",
+          "duration_minutes": 70,
+          "machine_required": "Switch Grinding Machine"
+        }
+      ],
+      "is_shadow_block": false,
+      "ohe_power_isolated": false,
+      "elementary_section": null,
+      "post_block_speed_restriction_kmh": 30,
+      "controller_approved": false
+    }
+  ],
+  "updated_trains": [
+    {
+      "train_number": "12004",
+      "train_name": "Lucknow Shatabdi Express",
+      "train_type": "Superfast",
+      "priority_weight": 90,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Lucknow Jn (LJN)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 25,
+      "normal_transit_minutes": 42,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "BOXN-4021",
+      "train_name": "Heavy Haul Coal Rake (58 BOXN)",
+      "train_type": "Freight",
+      "priority_weight": 5,
+      "origin": "Dadri DFC Yard",
+      "destination": "Panki Thermal Power Yard",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 45,
+      "normal_transit_minutes": 65,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Loop 2 Siding",
+      "status": "Looped (Siding)"
+    },
+    {
+      "train_number": "22436",
+      "train_name": "Vande Bharat Express (Semi-High Speed)",
+      "train_type": "Superfast",
+      "priority_weight": 100,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Varanasi Jn (BSB)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 65,
+      "normal_transit_minutes": 38,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "12401",
+      "train_name": "Nanda Devi Superfast Express",
+      "train_type": "Express",
+      "priority_weight": 50,
+      "origin": "Kota Jn (KOTA)",
+      "destination": "Dehradun (DDN)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 80,
+      "normal_transit_minutes": 45,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 4,
+      "assigned_line": "Main",
+      "status": "Regulated (+4m)"
+    },
+    {
+      "train_number": "12302",
+      "train_name": "Howrah Rajdhani Express (via Patna)",
+      "train_type": "Superfast",
+      "priority_weight": 100,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Howrah Jn (HWH)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01",
+        "SEC-HWH-BWN-02"
+      ],
+      "entry_time_minutes": 140,
+      "normal_transit_minutes": 36,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "12560",
+      "train_name": "Shiv Ganga Superfast Express",
+      "train_type": "Express",
+      "priority_weight": 60,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Banaras (BSBS)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 170,
+      "normal_transit_minutes": 44,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 4,
+      "assigned_line": "Main",
+      "status": "Regulated (+4m)"
+    },
+    {
+      "train_number": "BCN-9104",
+      "train_name": "Foodgrain Grain Rake (42 BCN)",
+      "train_type": "Freight",
+      "priority_weight": 5,
+      "origin": "Tundla Goods Yard",
+      "destination": "Kanpur Juhi Goods Yard",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 195,
+      "normal_transit_minutes": 68,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Loop 2 Siding",
+      "status": "Looped (Siding)"
+    },
+    {
+      "train_number": "12582",
+      "train_name": "New Delhi - Banaras Superfast",
+      "train_type": "Express",
+      "priority_weight": 55,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Banaras (BSBS)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 245,
+      "normal_transit_minutes": 46,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 4,
+      "assigned_line": "Main",
+      "status": "Regulated (+4m)"
+    },
+    {
+      "train_number": "12276",
+      "train_name": "Prayagraj Humsafar Express",
+      "train_type": "Superfast",
+      "priority_weight": 85,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Prayagraj Jn (PRYJ)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 285,
+      "normal_transit_minutes": 40,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "BTPN-3312",
+      "train_name": "Petroleum Fuel Rake (50 BTPN)",
+      "train_type": "Freight",
+      "priority_weight": 5,
+      "origin": "Mathura Refinery",
+      "destination": "Kanpur Panki Siding",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 310,
+      "normal_transit_minutes": 70,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    }
+  ],
+  "unassigned_requests": [],
+  "operational_justification": "\u2705 CP-SAT Solver converged in 117.3ms (OPTIMAL). Successfully unified 10 departmental requests into 5 coordinated blocks, creating 4 Multi-Department Shadow Blocks and saving 3.1 hours of corridor closure time. Protected all Superfast passenger trains (0 min delay) by dynamically stabling 2 freight train(s) on station loop sidings and applying minor 12m regulation to express traffic under Section Working Rules."
+}

@@ -1,0 +1,475 @@
+{
+  "requests": [
+    {
+      "request_id": "REQ-TRK-101",
+      "department": "Track",
+      "location_sector": "SEC-NDLS-CNB-01",
+      "track_line": "Down Main",
+      "start_km": 1012.4,
+      "end_km": 1017.8,
+      "duration_minutes": 90,
+      "priority": "Critical",
+      "work_description": "09-3X Dynamic Tamping Express - Track geometry correction & ballast stabilization",
+      "machine_required": "09-3X Tamping Express",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-SIG-101",
+      "department": "Signal",
+      "location_sector": "SEC-NDLS-CNB-01",
+      "track_line": "Down Main",
+      "start_km": 1014.0,
+      "end_km": 1015.2,
+      "duration_minutes": 45,
+      "priority": "High",
+      "work_description": "Electronic Interlocking (EI) Point Machine #14B motor overhaul & track circuit insulation testing",
+      "machine_required": "S&T Testing Kit",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-TRC-101",
+      "department": "Traction",
+      "location_sector": "SEC-NDLS-CNB-01",
+      "track_line": "Down Main",
+      "start_km": 1012.0,
+      "end_km": 1018.0,
+      "duration_minutes": 60,
+      "priority": "High",
+      "work_description": "25 kV AC OHE contact wire height adjustment & polymer insulator high-pressure washing",
+      "machine_required": "4-Wheeler Tower Wagon #TW-88",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-TRK-201",
+      "department": "Track",
+      "location_sector": "SEC-HWH-BWN-02",
+      "track_line": "Down Main",
+      "start_km": 45.0,
+      "end_km": 49.5,
+      "duration_minutes": 120,
+      "priority": "High",
+      "work_description": "Ballast Cleaning Machine (BCM) shoulder screening & sleeper replenishment",
+      "machine_required": "Plasser BCM-300",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-TRC-201",
+      "department": "Traction",
+      "location_sector": "SEC-HWH-BWN-02",
+      "track_line": "Down Main",
+      "start_km": 45.0,
+      "end_km": 50.0,
+      "duration_minutes": 75,
+      "priority": "Medium",
+      "work_description": "OHE Catenary dropper replacement and neutral section inspection",
+      "machine_required": "Tower Wagon #TW-42",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-TRK-301",
+      "department": "Track",
+      "location_sector": "SEC-BCT-BRC-03",
+      "track_line": "Down Main",
+      "start_km": 210.0,
+      "end_km": 214.2,
+      "duration_minutes": 110,
+      "priority": "High",
+      "work_description": "Continuous Tamping Machine CSM #903 ballast packing & alignment",
+      "machine_required": "CSM Tamping Machine",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-SIG-301",
+      "department": "Signal",
+      "location_sector": "SEC-BCT-BRC-03",
+      "track_line": "Down Main",
+      "start_km": 211.5,
+      "end_km": 213.0,
+      "duration_minutes": 50,
+      "priority": "Medium",
+      "work_description": "Multi-Section Digital Axle Counter (MSDAC) transducer reset & cable insulation check",
+      "machine_required": "MSDAC Calibration Unit",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-TRC-401",
+      "department": "Traction",
+      "location_sector": "SEC-MAS-BZA-01",
+      "track_line": "Down Main",
+      "start_km": 88.0,
+      "end_km": 93.0,
+      "duration_minutes": 60,
+      "priority": "Medium",
+      "work_description": "Bracket assembly renewal & cantilever insulator greasing",
+      "machine_required": "8-Wheeler DETC Tower Car",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-SIG-401",
+      "department": "Signal",
+      "location_sector": "SEC-MAS-BZA-01",
+      "track_line": "Down Main",
+      "start_km": 90.0,
+      "end_km": 92.0,
+      "duration_minutes": 35,
+      "priority": "Low",
+      "work_description": "Automatic Block Signalling (ABS) Signal lamp unit optical alignment",
+      "machine_required": "Signal Diagnostic Tool",
+      "status": "Pending"
+    },
+    {
+      "request_id": "REQ-TRK-501",
+      "department": "Track",
+      "location_sector": "SEC-SBC-MYS-01",
+      "track_line": "Down Main",
+      "start_km": 32.0,
+      "end_km": 35.0,
+      "duration_minutes": 70,
+      "priority": "Low",
+      "work_description": "Turnout rail grinding and tongue rail lubricator maintenance",
+      "machine_required": "Switch Grinding Machine",
+      "status": "Pending"
+    }
+  ],
+  "timetables": [
+    {
+      "timetable_id": "TT-NDLS-01",
+      "location_sector": "SEC-NDLS-CNB-01",
+      "track_line": "Down Main",
+      "start_time": "2026-08-23T01:00:00Z",
+      "end_time": "2026-08-23T05:00:00Z",
+      "available_duration_minutes": 240,
+      "traffic_status": "Clear Window (Night Non-Peak)"
+    },
+    {
+      "timetable_id": "TT-HWH-02",
+      "location_sector": "SEC-HWH-BWN-02",
+      "track_line": "Down Main",
+      "start_time": "2026-08-23T00:30:00Z",
+      "end_time": "2026-08-23T04:00:00Z",
+      "available_duration_minutes": 210,
+      "traffic_status": "Clear Window (Corridor Block)"
+    },
+    {
+      "timetable_id": "TT-BCT-03",
+      "location_sector": "SEC-BCT-BRC-03",
+      "track_line": "Down Main",
+      "start_time": "2026-08-23T01:30:00Z",
+      "end_time": "2026-08-23T05:00:00Z",
+      "available_duration_minutes": 210,
+      "traffic_status": "Clear Window (Freight Free Slot)"
+    },
+    {
+      "timetable_id": "TT-MAS-01",
+      "location_sector": "SEC-MAS-BZA-01",
+      "track_line": "Down Main",
+      "start_time": "2026-08-23T02:00:00Z",
+      "end_time": "2026-08-23T04:30:00Z",
+      "available_duration_minutes": 150,
+      "traffic_status": "Clear Window (Pre-Dawn Window)"
+    },
+    {
+      "timetable_id": "TT-SBC-01",
+      "location_sector": "SEC-SBC-MYS-01",
+      "track_line": "Down Main",
+      "start_time": "2026-08-23T02:30:00Z",
+      "end_time": "2026-08-23T04:30:00Z",
+      "available_duration_minutes": 120,
+      "traffic_status": "Clear Window (Inter-City Lull)"
+    }
+  ],
+  "trains": [
+    {
+      "train_number": "12004",
+      "train_name": "Lucknow Shatabdi Express",
+      "train_type": "Superfast",
+      "priority_weight": 90,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Lucknow Jn (LJN)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 25,
+      "normal_transit_minutes": 42,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "BOXN-4021",
+      "train_name": "Heavy Haul Coal Rake (58 BOXN)",
+      "train_type": "Freight",
+      "priority_weight": 5,
+      "origin": "Dadri DFC Yard",
+      "destination": "Panki Thermal Power Yard",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 45,
+      "normal_transit_minutes": 65,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    },
+    {
+      "train_number": "22436",
+      "train_name": "Vande Bharat Express (Semi-High Speed)",
+      "train_type": "Superfast",
+      "priority_weight": 100,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Varanasi Jn (BSB)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 65,
+      "normal_transit_minutes": 38,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "12401",
+      "train_name": "Nanda Devi Superfast Express",
+      "train_type": "Express",
+      "priority_weight": 50,
+      "origin": "Kota Jn (KOTA)",
+      "destination": "Dehradun (DDN)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 80,
+      "normal_transit_minutes": 45,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    },
+    {
+      "train_number": "12302",
+      "train_name": "Howrah Rajdhani Express (via Patna)",
+      "train_type": "Superfast",
+      "priority_weight": 100,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Howrah Jn (HWH)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01",
+        "SEC-HWH-BWN-02"
+      ],
+      "entry_time_minutes": 140,
+      "normal_transit_minutes": 36,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time (0 delay)"
+    },
+    {
+      "train_number": "12560",
+      "train_name": "Shiv Ganga Superfast Express",
+      "train_type": "Express",
+      "priority_weight": 60,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Banaras (BSBS)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 170,
+      "normal_transit_minutes": 44,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    },
+    {
+      "train_number": "BCN-9104",
+      "train_name": "Foodgrain Grain Rake (42 BCN)",
+      "train_type": "Freight",
+      "priority_weight": 5,
+      "origin": "Tundla Goods Yard",
+      "destination": "Kanpur Juhi Goods Yard",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 195,
+      "normal_transit_minutes": 68,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    },
+    {
+      "train_number": "12582",
+      "train_name": "New Delhi - Banaras Superfast",
+      "train_type": "Express",
+      "priority_weight": 55,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Banaras (BSBS)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 245,
+      "normal_transit_minutes": 46,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    },
+    {
+      "train_number": "12276",
+      "train_name": "Prayagraj Humsafar Express",
+      "train_type": "Superfast",
+      "priority_weight": 85,
+      "origin": "New Delhi (NDLS)",
+      "destination": "Prayagraj Jn (PRYJ)",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 285,
+      "normal_transit_minutes": 40,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    },
+    {
+      "train_number": "BTPN-3312",
+      "train_name": "Petroleum Fuel Rake (50 BTPN)",
+      "train_type": "Freight",
+      "priority_weight": 5,
+      "origin": "Mathura Refinery",
+      "destination": "Kanpur Panki Siding",
+      "route_sectors": [
+        "SEC-NDLS-CNB-01"
+      ],
+      "entry_time_minutes": 310,
+      "normal_transit_minutes": 70,
+      "actual_entry_time_minutes": null,
+      "delay_minutes": 0,
+      "assigned_line": "Main",
+      "status": "On Time"
+    }
+  ],
+  "corridors": {
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "lat": 28.6424,
+        "lng": 77.2195,
+        "division": "Delhi"
+      },
+      {
+        "code": "CNB",
+        "name": "Kanpur Central",
+        "lat": 26.4547,
+        "lng": 80.353,
+        "division": "Prayagraj"
+      },
+      {
+        "code": "HWH",
+        "name": "Howrah",
+        "lat": 22.584,
+        "lng": 88.3426,
+        "division": "Howrah"
+      },
+      {
+        "code": "BWN",
+        "name": "Bardhaman",
+        "lat": 23.2324,
+        "lng": 87.8615,
+        "division": "Howrah"
+      },
+      {
+        "code": "BCT",
+        "name": "Mumbai Central",
+        "lat": 18.9696,
+        "lng": 72.8193,
+        "division": "Mumbai"
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "lat": 22.3107,
+        "lng": 73.1812,
+        "division": "Vadodara"
+      },
+      {
+        "code": "MAS",
+        "name": "Chennai Central",
+        "lat": 13.0827,
+        "lng": 80.2707,
+        "division": "Chennai"
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "lat": 16.5193,
+        "lng": 80.6225,
+        "division": "Vijayawada"
+      },
+      {
+        "code": "SBC",
+        "name": "KSR Bengaluru",
+        "lat": 12.9779,
+        "lng": 77.5713,
+        "division": "Bengaluru"
+      },
+      {
+        "code": "MYS",
+        "name": "Mysuru",
+        "lat": 12.316,
+        "lng": 76.645,
+        "division": "Mysuru"
+      }
+    ],
+    "sectors": [
+      {
+        "id": "SEC-NDLS-CNB-01",
+        "name": "New Delhi - Kanpur High Density Corridor",
+        "from": "NDLS",
+        "to": "CNB",
+        "distance_km": 440,
+        "lines": 2,
+        "loops": 4
+      },
+      {
+        "id": "SEC-HWH-BWN-02",
+        "name": "Howrah - Bardhaman Chord Line",
+        "from": "HWH",
+        "to": "BWN",
+        "distance_km": 95,
+        "lines": 3,
+        "loops": 2
+      },
+      {
+        "id": "SEC-BCT-BRC-03",
+        "name": "Mumbai Central - Vadodara Trunk",
+        "from": "BCT",
+        "to": "BRC",
+        "distance_km": 390,
+        "lines": 2,
+        "loops": 3
+      },
+      {
+        "id": "SEC-MAS-BZA-01",
+        "name": "Chennai Central - Vijayawada GT Route",
+        "from": "MAS",
+        "to": "BZA",
+        "distance_km": 430,
+        "lines": 2,
+        "loops": 3
+      },
+      {
+        "id": "SEC-SBC-MYS-01",
+        "name": "KSR Bengaluru - Mysuru Section",
+        "from": "SBC",
+        "to": "MYS",
+        "distance_km": 138,
+        "lines": 2,
+        "loops": 2
+      }
+    ]
+  }
+}

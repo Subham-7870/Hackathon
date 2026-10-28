@@ -1,9 +1,9 @@
 # Remaining delivery tasks
 
-- [ ] Write a clear user-facing explanation of the planning workflow, data views, interactions, and current prototype boundary.
-- [ ] Confirm the publishable website’s completed-plan interaction and responsive layout.
-- [ ] Save a deployment-ready checkpoint for the permanent website.
-- [ ] Deliver the working explanation and instruct the user to publish from the project interface.
+- [x] Write a clear user-facing explanation of the planning workflow, data views, interactions, and current prototype boundary.
+- [x] Confirm the publishable website’s completed-plan interaction and responsive layout.
+- [x] Save a deployment-ready checkpoint for the permanent website.
+- [x] Deliver the working explanation and instruct the user to publish from the project interface.
 - [x] Verify the available interactive map component and map the displayed sector codes to real railway locations.
 - [x] Add a maintenance-location map with sector pins, location labels, and work/capacity context.
 - [x] Validate the map on desktop and mobile, then save a new publish-ready checkpoint.
@@ -16,3 +16,5 @@
 - [x] Add a stable React key to the mapped railway corridor fragment and verify the browser console is clear.
 - [x] Analyze the uploaded SIH 2026 Auto Block Plan deck and map its slide structure.
 - [x] Prepare ready-to-paste content for each existing slide without modifying the presentation file.
+- [x] Complete pristine backup of original v1 release and manus drafts to backup_original_website/.
+- [x] Redesign and polish main website (index.html, styles.css, app.js, railRoutes.js) to v2.0 Pro.

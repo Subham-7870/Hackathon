@@ -1,0 +1,24 @@
+# Dependencies & Build Artefacts
+node_modules/
+.vercel
+dist/
+build/
+
+# Environment and Logs
+.env
+.env.local
+.env.*.local
+*.log
+
+# Python Artefacts
+backend/venv/
+backend/__pycache__/
+*.pyc
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.gemini/
+.agents/

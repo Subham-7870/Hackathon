@@ -3,103 +3,851 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indian Railways - AI Automatic Block Planning Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>SthitiShodhana (स्थितिशोधन) | Autonomous Train Dispatching & Dynamic Maintenance Block Optimizer</title>
+  <meta name="description" content="SthitiShodhana (स्थितिशोधन) — Autonomous Train Dispatching & Dynamic Maintenance Block Optimizer for Indian Railways (SIH #26027).">
+  
+  <!-- Favicon with Railway Tracks Monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231468D4'/><path d='M25 75 L25 25 M75 75 L75 25 M25 35 L75 35 M25 50 L75 50 M25 65 L75 65' stroke='white' stroke-width='8' stroke-linecap='round'/></svg>">
+  
+  <!-- Fonts: Manrope (UI) & DM Mono (Codes & Timestamps) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=20260925_sthitishodhana">
 </head>
 <body>
-  <header class="app-header">
-    <div class="logo-container">
-      <div class="railway-emblem">IR</div>
-      <div>
-        <h1>Indian Railways - Block Planning Control Center</h1>
-        <p class="subtitle">Problem Statement 26027: AI-Powered Automatic Integrated Block Planning</p>
-      </div>
-    </div>
-    <div class="action-bar">
-      <button id="optimizeBtn" class="btn-primary">
-        <span class="btn-icon">⚡</span>
-        <span class="btn-text">Optimize Schedule</span>
-        <div id="btnSpinner" class="spinner hidden"></div>
-      </button>
-      <button id="resetBtn" class="btn-secondary">Reset Mock Data</button>
-    </div>
-  </header>
-
-  <main class="dashboard-grid">
-    <!-- Stats Bar -->
-    <section class="stats-banner">
-      <div class="stat-card">
-        <span class="stat-label">Pending Requests</span>
-        <span id="statPending" class="stat-value text-amber">10</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-label">Timetable Windows</span>
-        <span id="statWindows" class="stat-value text-blue">5</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-label">Optimized Blocks</span>
-        <span id="statBlocks" class="stat-value text-green">0</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-label">Integrated Multi-Dept Efficiency</span>
-        <span id="statEfficiency" class="stat-value text-purple">0%</span>
-      </div>
-    </section>
-
-    <!-- Main Content Layout -->
-    <div class="content-split">
-      <!-- Left Panel: Pending Requests -->
-      <section class="panel panel-left">
-        <div class="panel-header">
-          <h2>Table 1: Maintenance Requests</h2>
-          <span class="badge badge-info">Source Data</span>
+  <div class="app-shell">
+    
+    <!-- Top Bar / Executive Navigation -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-logo-group">
+          <div class="railway-crest" title="Ministry of Railways · Government of India">
+            <svg class="crest-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 25L8 7M24 25L24 7M8 11L24 11M8 16L24 16M8 21L24 21" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="16" cy="16" r="3.5" fill="#FFFFFF" fill-opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title-row">
+              <h1 class="brand-title">SthitiShodhana <span class="brand-devanagari">(स्थितिशोधन)</span></h1>
+              <span class="version-tag">AI DISPATCH</span>
+            </div>
+            <div class="brand-subtitle-row">
+              <span class="brand-tagline">Autonomous Train Dispatching &amp; Dynamic Maintenance Block Optimizer</span>
+            </div>
+            <div class="brand-meta-row">
+              <span class="meta-org">INDIAN RAILWAYS</span>
+              <span class="meta-dot">·</span>
+              <span class="badge-sih">SIH 2026 #26027</span>
+              <span class="badge-team">Team Trailblazer</span>
+            </div>
+          </div>
         </div>
-        <div class="table-responsive">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Request ID</th>
-                <th>Department</th>
-                <th>Sector</th>
-                <th>Duration</th>
-                <th>Priority</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="requestsTableBody">
-              <!-- Dynamically Populated -->
-            </tbody>
-          </table>
-        </div>
-      </section>
+      </div>
 
-      <!-- Right Panel: Timetables & AI Output -->
-      <section class="panel panel-right">
-        <div class="panel-header">
-          <h2>Table 3: Optimized Integrated Blocks</h2>
-          <span id="blockBadge" class="badge badge-warning">Awaiting Optimization</span>
+      <div class="header-center">
+        <div class="system-telemetry-pill">
+          <div class="telemetry-block">
+            <span class="telemetry-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              HORIZON
+            </span>
+            <span class="telemetry-val">23 AUG 2026 (00:00–06:00)</span>
+          </div>
+          <div class="telemetry-sep"></div>
+          <div class="telemetry-block">
+            <span class="telemetry-label">
+              <span class="live-dot-pulse"></span>
+              LIVE IST
+            </span>
+            <span class="telemetry-val" id="systemClock">--:--:-- IST</span>
+          </div>
         </div>
-        
-        <!-- Live Execution Console -->
-        <div id="executionConsole" class="console-box hidden">
-          <div class="console-header">🤖 Antigravity Webhook Execution Logs</div>
-          <div id="consoleLogs" class="console-body"></div>
-        </div>
+      </div>
 
-        <!-- Output Blocks Gantt / Cards -->
-        <div id="blocksContainer" class="blocks-feed">
-          <div class="empty-state">
-            <div class="empty-icon">🚆</div>
-            <h3>No Scheduled Blocks Generated Yet</h3>
-            <p>Click "Optimize Schedule" above to run the AI grouping model on pending requests.</p>
+      <div class="header-actions">
+        <button id="addRequestBtn" class="btn btn-outline header-btn" type="button" title="Add a custom maintenance request">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Add Request</span>
+        </button>
+
+        <button id="toggleTelemetryBtn" class="btn btn-outline header-btn" type="button" title="Toggle AI optimization solver logs">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span>AI Telemetry</span>
+        </button>
+
+        <button id="resetBtn" class="btn btn-secondary header-btn" type="button" title="Reset all scheduled blocks">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <span>Reset</span>
+        </button>
+
+        <button id="optimizeBtn" class="btn btn-primary header-btn-primary" type="button">
+          <span id="btnIcon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </span>
+          <span id="btnText">Build Optimized Plan</span>
+          <div id="btnSpinner" class="spinner hidden"></div>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      
+      <!-- Executive Summary / Hero Banner -->
+      <section class="hero-strip">
+        <div class="hero-text">
+          <h2>Autonomous Train Dispatching &amp; Dynamic Maintenance Block Optimizer</h2>
+          <p><strong>Sthiti (स्थिति)</strong>: Real-time track occupancy, headway states &amp; scheduled block possessions. <strong>Shodhana (शोधन)</strong>: Intelligent constraint optimization consolidating <strong>Track, Signal &amp; Traction</strong> to eliminate redundant closures and maximize throughput.</p>
+        </div>
+        <div class="hero-status">
+          <div class="status-indicator-pill" id="globalPlanStatus">
+            <span class="status-dot dot-ready"></span>
+            <span class="status-text" id="globalStatusText">Ready for Automatic Optimization</span>
           </div>
         </div>
       </section>
-    </div>
-  </main>
 
-  <script src="app.js"></script>
+      <!-- KPI Metrics Grid -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap icon-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="kpi-details">
+            <span class="kpi-label">Maintenance Requests</span>
+            <div class="kpi-value-row">
+              <strong class="kpi-value" id="kpiPending">10</strong>
+              <span class="kpi-sub" id="kpiPendingSub">10 Pending</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap icon-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="kpi-details">
+            <span class="kpi-label">Clear Timetable Windows</span>
+            <div class="kpi-value-row">
+              <strong class="kpi-value">5</strong>
+              <span class="kpi-sub">870 Min Available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap icon-purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="kpi-details">
+            <span class="kpi-label">Departments Coordinated</span>
+            <div class="kpi-value-row">
+              <strong class="kpi-value">3</strong>
+              <span class="kpi-sub">Track, Signal, Traction</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-card-highlight">
+          <div class="kpi-icon-wrap icon-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="kpi-details">
+            <span class="kpi-label">Multi-Dept Consolidation</span>
+            <div class="kpi-value-row">
+              <strong class="kpi-value text-green" id="kpiEfficiency">0%</strong>
+              <span class="kpi-sub" id="kpiBlocksSub">Awaiting Plan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap icon-cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="kpi-details">
+            <span class="kpi-label">Downtime Prevented</span>
+            <div class="kpi-value-row">
+              <strong class="kpi-value" id="kpiDowntimeSaved">0 min</strong>
+              <span class="kpi-sub" id="kpiDowntimeSub">Via Joint Closures</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Optimization Algorithm Logic Strip -->
+      <section class="logic-strip">
+        <div class="logic-header">
+          <span class="logic-badge">AI OPTIMIZATION CRITERIA</span>
+          <h3>Mathematical Constraints & Scheduling Policy</h3>
+        </div>
+        <div class="logic-cards">
+          <div class="logic-card">
+            <span class="logic-num">01</span>
+            <div class="logic-body">
+              <h4>Geographic Grouping</h4>
+              <p>Maintenance requests are strictly bundled when sharing the identical railway location sector (<code class="code-sm">location_sector</code>).</p>
+            </div>
+          </div>
+          <div class="logic-card">
+            <span class="logic-num">02</span>
+            <div class="logic-body">
+              <h4>Capacity & Timetable Protection</h4>
+              <p>Combined duration must not exceed available clear window (<code class="code-sm">Σ Duration ≤ Capacity</code>). High-priority work prioritized first.</p>
+            </div>
+          </div>
+          <div class="logic-card">
+            <span class="logic-num">03</span>
+            <div class="logic-body">
+              <h4>Multi-Department Consolidation</h4>
+              <p>Maximizes cross-departmental bundling (Track + Signal + Traction) inside a unified common date and time window.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Leaflet Corridor Map -->
+      <section class="map-section">
+        <div class="section-title-bar">
+          <div>
+            <span class="section-eyebrow">RAIL CORRIDOR MONITORING</span>
+            <h2 class="section-title">Corridor Traffic & Automatic Block Overview</h2>
+            <p class="section-desc">Switch between real-world geospatial view and an intuitive Indian Metro-style dynamic linear track schematic.</p>
+          </div>
+
+          <div class="view-and-controls">
+            <!-- View Mode Switcher -->
+            <div class="view-mode-tabs" id="viewModeTabs">
+              <button class="view-tab is-active" id="tabMetroSchematic" type="button" title="View Metro-Style Linear Track Schematic">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3M8 15h.01M16 15h.01"/></svg>
+                <span>Metro Track Display</span>
+              </button>
+              <button class="view-tab" id="tabGeoMap" type="button" title="View Real Geographical Map">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <span>Geospatial Map</span>
+              </button>
+            </div>
+
+            <div class="map-controls">
+              <div class="sector-filter-buttons" id="sectorFilterButtons">
+                <button class="sector-pill is-active" data-sector="ALL" type="button">All Corridors (5)</button>
+                <button class="sector-pill" data-sector="SEC-NDLS-CNB-01" type="button">NDLS – CNB</button>
+                <button class="sector-pill" data-sector="SEC-HWH-BWN-02" type="button">HWH – BWN</button>
+                <button class="sector-pill" data-sector="SEC-BCT-BRC-03" type="button">BCT – BRC</button>
+                <button class="sector-pill" data-sector="SEC-MAS-BZA-01" type="button">MAS – BZA</button>
+                <button class="sector-pill" data-sector="SEC-SBC-MYS-01" type="button">SBC – MYS</button>
+              </div>
+              <button id="resetMapBtn" class="btn btn-sm btn-outline" type="button" title="Reset map zoom to all India">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <span>Fit All</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Train Simulation Control Bar -->
+        <div class="train-simulation-bar">
+          <div class="sim-status-group">
+            <span class="live-pulse-indicator" id="simLiveBadge">
+              <span class="pulse-ring"></span>
+              <span class="pulse-core"></span>
+              LIVE TRAIN RADAR
+            </span>
+            <span class="sim-train-counter" id="activeTrainCount">6 Trains Active</span>
+          </div>
+
+          <div class="sim-controls-group">
+            <button id="playPauseSimBtn" class="btn btn-sm btn-outline sim-action-btn" type="button" title="Play / Pause Train Simulation">
+              <span id="playPauseIcon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </span>
+              <span id="playPauseText">Pause</span>
+            </button>
+
+            <div class="speed-selector" id="speedSelector">
+              <span class="speed-label">Speed:</span>
+              <button class="speed-btn" data-speed="1" type="button">1x</button>
+              <button class="speed-btn is-active" data-speed="2" type="button">2x</button>
+              <button class="speed-btn" data-speed="4" type="button">4x</button>
+              <button class="speed-btn" data-speed="8" type="button">8x</button>
+            </div>
+
+            <!-- Sound Announcements Toggle Button -->
+            <button id="toggleSoundBtn" class="btn btn-sm btn-outline sim-action-btn" type="button" title="Toggle Indian Railways Station PIS Chimes & Voice Announcements">
+              <span id="soundIcon">🔊</span>
+              <span id="soundStatusText">Audio PIS: ON</span>
+            </button>
+
+            <!-- Chaos Incident Simulator Button -->
+            <button id="chaosIncidentBtn" class="btn btn-sm btn-outline btn-emergency" type="button" title="Trigger Line Hazards, Rail Fractures, & OHE Snaps">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Chaos Simulator</span>
+            </button>
+
+            <button id="openActiveCabBtn" class="btn btn-sm btn-primary" type="button" title="View live locomotive driver cab HUD">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="m19 19-3-3"/></svg>
+              <span>Loco Cab HUD</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="map-wrapper" id="mapDisplayArea">
+          <!-- Geospatial Map View (Hidden by default, togglable) -->
+          <div id="geoMapView" class="geo-map-container hidden">
+            <div id="corridorMap" class="leaflet-corridor-map"></div>
+            
+            <div class="map-legend">
+              <div class="legend-item">
+                <span class="legend-train-dot">🚄</span>
+                <span>Live Moving Train</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color-line line-route"></span>
+                <span>Rail Track</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot dot-station"></span>
+                <span>Station</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-badge badge-active-work">● Maintenance Block</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Indian Metro Style Linear Track Schematic Display (Default Primary View) -->
+          <div id="metroSchematicView" class="metro-schematic-wrapper">
+            <div class="metro-pis-banner">
+              <div class="pis-header-left">
+                <span class="metro-line-badge" id="metroLineBadge">INDIAN RAILWAYS · DYNAMIC LINE DISPLAY</span>
+                <h3 class="pis-route-title" id="metroRouteTitle">NEW DELHI (NDLS) ➔ KANPUR CENTRAL (CNB)</h3>
+              </div>
+              <div class="pis-announcement">
+                <span class="pis-ticker-dot"></span>
+                <span id="metroAnnouncementText">NEXT STATION: ALIGARH JN (ALJN) · PLATFORM 3 · SPEED: 130 KM/H · KAVACH SIL-4 INTERLOCKED</span>
+              </div>
+            </div>
+
+            <!-- Active Emergency / Hazard Incident Banner (Hidden when normal) -->
+            <div id="chaosIncidentBanner" class="chaos-incident-banner hidden">
+              <div class="chaos-banner-left">
+                <span class="chaos-pulse-dot"></span>
+                <strong class="chaos-title" id="chaosBannerTitle">MAINLINE INCIDENT DETECTED</strong>
+                <span class="chaos-desc" id="chaosBannerDesc">Kavach SIL-4 trip initiated. Dynamic AI loop diversion engaged.</span>
+              </div>
+              <div class="chaos-banner-actions">
+                <button type="button" id="resolveIncidentBannerBtn" class="btn btn-xs btn-outline-white">Resolve & Clear Mainline</button>
+              </div>
+            </div>
+
+            <div class="metro-track-canvas-container">
+              <svg id="metroTrackSvg" class="metro-track-svg" viewBox="0 0 1100 300" preserveAspectRatio="xMidYMid meet">
+                <!-- Dynamically generated dual-track lines, stations, blocks, and moving metro train cars -->
+              </svg>
+            </div>
+
+            <div class="metro-footer-legend">
+              <div class="metro-legend-item">
+                <span class="metro-dot dot-passed"></span>
+                <span>Passed Station</span>
+              </div>
+              <div class="metro-legend-item">
+                <span class="metro-dot dot-active"></span>
+                <span>Next Station (Approaching)</span>
+              </div>
+              <div class="metro-legend-item">
+                <span class="metro-dot dot-upcoming"></span>
+                <span>Upcoming Station</span>
+              </div>
+              <div class="metro-legend-item">
+                <span class="metro-track-sample track-up"></span>
+                <span>UP Line (130 km/h)</span>
+              </div>
+              <div class="metro-legend-item">
+                <span class="metro-track-sample track-loop"></span>
+                <span>Bypass Loop (Diverted 45 km/h)</span>
+              </div>
+              <div class="metro-legend-item">
+                <span class="metro-track-sample track-down"></span>
+                <span>DOWN Line (130 km/h)</span>
+              </div>
+              <div class="metro-legend-item">
+                <span class="metro-block-sample"></span>
+                <span>Active AI Maintenance Possession</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Train Telemetry Radar Strip -->
+        <div class="train-radar-strip">
+          <div class="radar-header">
+            <h4>Real-Time Train Fleet Telemetry & Kavach Monitoring</h4>
+            <span class="radar-sub">Click any train to view in-cab instrumentation and track telemetry</span>
+          </div>
+          <div class="train-cards-carousel" id="trainFleetCarousel">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Source Data & Timetable Window Split -->
+      <section class="workspace-grid">
+        
+        <!-- Left: Maintenance Requests Panel -->
+        <article class="panel requests-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title-row">
+                <h3 class="panel-title">Table 1: Maintenance Requests</h3>
+                <span id="requestsCount" class="badge-count">10 records</span>
+              </div>
+              <p class="panel-subtitle">Outstanding field department requests awaiting safe block grant.</p>
+            </div>
+            
+            <div class="panel-tools">
+              <div class="search-input-wrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="requestSearch" placeholder="Search requests, sectors..." aria-label="Search requests">
+              </div>
+            </div>
+          </div>
+
+          <!-- Department Filter Chips -->
+          <div class="filter-strip">
+            <span class="filter-label">Filter:</span>
+            <div class="filter-chips" id="deptFilterChips">
+              <button class="filter-chip is-active" data-dept="All" type="button">All (10)</button>
+              <button class="filter-chip chip-track" data-dept="Track" type="button">Track</button>
+              <button class="filter-chip chip-signal" data-dept="Signal" type="button">Signal</button>
+              <button class="filter-chip chip-traction" data-dept="Traction" type="button">Traction</button>
+              <button class="filter-chip chip-priority" data-dept="HighPriority" type="button">High Priority Only</button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">Request ID</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Sector</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Weekly Availability Preference</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="requestsTableBody">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Right: Clear Timetable Windows Panel -->
+        <article class="panel timetable-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title-row">
+                <h3 class="panel-title">Table 2: Clear Timetable Windows</h3>
+                <span class="badge-count badge-blue">5 clear slots</span>
+              </div>
+              <p class="panel-subtitle">Verified train traffic gaps permitting maintenance without passenger delay.</p>
+            </div>
+          </div>
+
+          <div id="timetableContainer" class="timetable-list">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </article>
+      </section>
+
+      <!-- Recommended Outcome: Optimized Blocks -->
+      <section class="results-section" id="resultsSection">
+        <div class="results-header-bar">
+          <div>
+            <span class="section-eyebrow text-emerald">TABLE 3: OPTIMIZED INTEGRATED BLOCKS</span>
+            <h2 class="section-title">Coordinated Maintenance Blocks & Schedule</h2>
+            <p class="section-desc" id="resultsDescription">Build the plan to generate consolidated multi-department blocks optimized against clear timetable windows.</p>
+          </div>
+          <div class="results-actions">
+            <span id="blockBadge" class="badge-status badge-waiting">Awaiting Plan Generation</span>
+            <button id="exportJsonBtn" class="btn btn-sm btn-outline hidden" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Export JSON</span>
+            </button>
+            <button id="printPlanBtn" class="btn btn-sm btn-outline hidden" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span>Print Sanction</span>
+            </button>
+            <button id="openOfficialMemoBtn" class="btn btn-sm btn-primary hidden" type="button" title="Generate Form T/1518 Block Sanction & Form T/409 Caution Order">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Official Memo (T/1518)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Blocks Container -->
+        <div id="blocksContainer" class="blocks-feed">
+          <div class="empty-state">
+            <div class="empty-icon-circle">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1468D4" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h3>No Scheduled Blocks Generated Yet</h3>
+            <p>Click <strong>"Build Optimized Plan"</strong> above to execute the automatic constraint solver and consolidate all 10 pending maintenance requests.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- AI Telemetry / Solver Drawer (Collapsible) -->
+    <aside id="telemetryDrawer" class="telemetry-drawer hidden" aria-label="AI Solver Telemetry">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span>AI Constraint Solver Telemetry & Webhook Logs</span>
+        </div>
+        <button id="closeTelemetryBtn" class="drawer-close-btn" type="button" aria-label="Close telemetry">✕</button>
+      </div>
+      <div class="drawer-body">
+        <div class="telemetry-meta">
+          <div><span>Engine:</span> <strong>Deterministic LLM Integration (Gemini Pro Schema)</strong></div>
+          <div><span>Target Schema:</span> <strong>Table_3_Optimized_Blocks</strong></div>
+          <div><span>Algorithm:</span> <strong>Geographic Clustering + Priority Bin Packing</strong></div>
+        </div>
+        <div id="telemetryLogs" class="telemetry-logs">
+          <div class="log-line text-muted">[SYSTEM] Telemetry listener initialized. Ready to record optimizer events.</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Custom Request Modal -->
+    <div id="customRequestModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3 id="modalTitle">Add Maintenance Request</h3>
+          <button id="closeModalBtn" class="modal-close" type="button">✕</button>
+        </div>
+        <form id="customRequestForm" class="modal-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reqDept">Department</label>
+              <select id="reqDept" required>
+                <option value="Track">Track (Permanent Way)</option>
+                <option value="Signal">Signal & Telecom (S&T)</option>
+                <option value="Traction">Traction (Overhead Electrical OHE)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reqSector">Corridor Sector</label>
+              <select id="reqSector" required>
+                <option value="SEC-NDLS-CNB-01">SEC-NDLS-CNB-01 (New Delhi – Kanpur)</option>
+                <option value="SEC-HWH-BWN-02">SEC-HWH-BWN-02 (Howrah – Barddhaman)</option>
+                <option value="SEC-BCT-BRC-03">SEC-BCT-BRC-03 (Mumbai – Vadodara)</option>
+                <option value="SEC-MAS-BZA-01">SEC-MAS-BZA-01 (Chennai – Vijayawada)</option>
+                <option value="SEC-SBC-MYS-01">SEC-SBC-MYS-01 (Bengaluru – Mysuru)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reqDuration">Work Duration (Minutes)</label>
+              <input type="number" id="reqDuration" min="15" max="240" step="15" value="60" required>
+            </div>
+            <div class="form-group">
+              <label for="reqPriority">Priority</label>
+              <select id="reqPriority" required>
+                <option value="High">High (Safety / Urgent)</option>
+                <option value="Medium" selected>Medium (Periodic Routine)</option>
+                <option value="Low">Low (Preventive / Secondary)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reqDay">Preferred Day & Date</label>
+              <input type="text" id="reqDay" value="Sunday, 23 Aug 2026" required>
+            </div>
+            <div class="form-group">
+              <label for="reqTime">Preferred Time Window</label>
+              <input type="text" id="reqTime" value="02:00–03:00" required>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="cancelModalBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add to Table 1</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Private Number (PN) Interlocking Modal -->
+    <div id="pnModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+      <div class="modal-container modal-sm">
+        <div class="modal-header">
+          <h3>Issue Private Number (PN) Block Sanction</h3>
+          <button id="closePnModalBtn" class="modal-close" type="button">✕</button>
+        </div>
+        <div class="modal-body pn-body">
+          <div class="pn-shield-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Block Authority Exchange</h4>
+          <p id="pnBlockDetails">Sanctioning Block BLK-20260823-001 on sector SEC-NDLS-CNB-01.</p>
+          <div class="pn-code-display">
+            <span class="pn-label">OFFICIAL CONTROL OFFICE PN:</span>
+            <strong class="pn-number" id="generatedPnCode">PN-8492</strong>
+          </div>
+          <p class="pn-note">In accordance with General & Subsidiary Rules (G&SR), both Section Controller and Station Master must log this Private Number before granting physical track possession.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="confirmPnBtn" class="btn btn-primary" style="width: 100%;">Confirm & Authorize Possession</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Locomotive Driver Cab Telemetry HUD Modal -->
+    <div id="cabModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="cabModalTitle">
+      <div class="modal-container modal-cab">
+        <div class="modal-header cab-header">
+          <div class="cab-title-wrap">
+            <span class="cab-kicker">INDIAN RAILWAYS · GLASS COCKPIT TELEMETRY</span>
+            <h3 id="cabModalTitle">Locomotive In-Cab HUD</h3>
+          </div>
+          <button id="closeCabModalBtn" class="modal-close" type="button" aria-label="Close cab HUD">✕</button>
+        </div>
+
+        <div class="cab-modal-body">
+          <div class="cab-telemetry-grid">
+            
+            <!-- Speedometer & Throttle Column -->
+            <div class="cab-speed-panel">
+              <div class="cab-gauge-box">
+                <div class="speed-dial">
+                  <div class="speed-value" id="cabSpeedValue">130</div>
+                  <div class="speed-unit">KM/H</div>
+                  <div class="speed-mps">MPS: 130 km/h</div>
+                </div>
+              </div>
+              <div class="cab-loco-tag" id="cabLocoModel">WAP-7 / 6000 HP 3-Phase AC</div>
+            </div>
+
+            <!-- Kavach & Signal Aspects Column -->
+            <div class="cab-safety-panel">
+              <!-- Kavach System Indicator -->
+              <div class="kavach-status-card">
+                <div class="kavach-header">
+                  <span class="kavach-shield-icon">🛡️</span>
+                  <div>
+                    <strong>KAVACH TCAS (SIL-4)</strong>
+                    <div class="kavach-sub">Indigenous Automatic Train Protection</div>
+                  </div>
+                </div>
+                <div class="kavach-pills">
+                  <span class="kavach-pill pill-active">● RADIO LINK OK</span>
+                  <span class="kavach-pill pill-active">● RFID TAG TRACKING</span>
+                  <span class="kavach-pill pill-active">● AUTO BRAKE ARMED</span>
+                </div>
+              </div>
+
+              <!-- Signal Aspect Ahead -->
+              <div class="signal-aspect-card">
+                <div class="aspect-header">
+                  <span class="aspect-label">NEXT SIGNAL ASPECT:</span>
+                  <strong class="aspect-text text-green" id="cabSignalText">PROCEED (GREEN)</strong>
+                </div>
+                <div class="aspect-lamps">
+                  <span class="aspect-lamp lamp-green is-lit" id="lampGreen"></span>
+                  <span class="aspect-lamp lamp-yellow" id="lampYellow"></span>
+                  <span class="aspect-lamp lamp-red" id="lampRed"></span>
+                </div>
+                <div class="signal-dist" id="cabSignalDist">Distance: 820m to Next Auto Signal</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Train Detail Strip -->
+          <div class="cab-train-details">
+            <div class="cab-detail-item">
+              <span class="cab-det-label">Train Name</span>
+              <strong id="cabTrainName">22436 Vande Bharat Express</strong>
+            </div>
+            <div class="cab-detail-item">
+              <span class="cab-det-label">Corridor Sector</span>
+              <strong id="cabSectorName">SEC-NDLS-CNB-01</strong>
+            </div>
+            <div class="cab-detail-item">
+              <span class="cab-det-label">Scheduled Block Conflict</span>
+              <strong class="text-green" id="cabConflictStatus">CLEAR (No Overlap)</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer cab-footer">
+          <button type="button" id="emergencyBrakeBtn" class="btn btn-outline btn-emergency">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Test Kavach Emergency Brake</span>
+          </button>
+          <button type="button" id="closeCabBtn2" class="btn btn-primary">Return to Radar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chaos Incident & Emergency Injection Modal -->
+    <div id="chaosModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="chaosModalTitle">
+      <div class="modal-container modal-lg chaos-modal-container">
+        <div class="modal-header chaos-header">
+          <div class="chaos-title-wrap">
+            <span class="chaos-kicker">INDIAN RAILWAYS · SECTION CONTROLLER SAFETY OVERRIDE</span>
+            <h3 id="chaosModalTitle">🚨 Mainline Chaos & Emergency Simulator</h3>
+          </div>
+          <button id="closeChaosModalBtn" class="modal-close" type="button" aria-label="Close Chaos Simulator">✕</button>
+        </div>
+
+        <div class="chaos-modal-body">
+          <p class="chaos-lead">
+            Simulate real-world mainline emergencies to evaluate <strong>Kavach SIL-4 Automatic Train Protection (ATP)</strong>, automatic signal aspect downgrades, and dynamic AI-driven loop line diversions.
+          </p>
+
+          <div class="chaos-cards-grid">
+            <!-- Scenario 1: Rail Fracture -->
+            <div class="chaos-card" data-incident="RAIL_FRACTURE">
+              <div class="chaos-card-badge badge-critical">CRITICAL P-WAY FAILURE</div>
+              <div class="chaos-card-icon">⚡</div>
+              <h4>Rail Fracture Detection</h4>
+              <p class="chaos-card-desc">Track circuit de-energizes at KM 78.4 (GZB–ALJN section). Continuous electrical continuity lost.</p>
+              <div class="chaos-impact-box">
+                <span class="impact-label">AUTOMATIC KAVACH RESPONSE:</span>
+                <strong>SIL-4 Emergency Service Brake trip. Approaching trains halted before hazard zone. Red aspect cascade.</strong>
+              </div>
+              <button type="button" class="btn btn-sm btn-danger inject-scenario-btn" data-scenario="RAIL_FRACTURE">Inject Rail Fracture</button>
+            </div>
+
+            <!-- Scenario 2: OHE Wire Snap -->
+            <div class="chaos-card" data-incident="OHE_SNAP">
+              <div class="chaos-card-badge badge-warning">25kV TRACTION OUTAGE</div>
+              <div class="chaos-card-icon">🔌</div>
+              <h4>OHE Catenary Wire Snap</h4>
+              <p class="chaos-card-desc">Overhead 25kV AC contact wire snaps between Ghaziabad and Aligarh. Traction substation circuit breaker trips.</p>
+              <div class="chaos-impact-box">
+                <span class="impact-label">AUTOMATIC KAVACH RESPONSE:</span>
+                <strong>Pantograph auto-drop, coasting mode activated, traction power block declared with instant SCADA alert.</strong>
+              </div>
+              <button type="button" class="btn btn-sm btn-warning inject-scenario-btn" data-scenario="OHE_SNAP">Inject OHE Snap</button>
+            </div>
+
+            <!-- Scenario 3: Signal Failure -->
+            <div class="chaos-card" data-incident="SIGNAL_FAILURE">
+              <div class="chaos-card-badge badge-caution">S&T INTERLOCKING TRIP</div>
+              <div class="chaos-card-icon">🚦</div>
+              <h4>Track Circuit & Signal Failure</h4>
+              <p class="chaos-card-desc">Axle counter communication fault causes Automatic Block Signal AS-42 to drop to Danger (Red aspect).</p>
+              <div class="chaos-impact-box">
+                <span class="impact-label">AUTOMATIC KAVACH RESPONSE:</span>
+                <strong>Fail-safe clamp: Speed restricted to 15 km/h Caution Order. Driver must stop for 1 min then proceed at walking speed.</strong>
+              </div>
+              <button type="button" class="btn btn-sm btn-caution inject-scenario-btn" data-scenario="SIGNAL_FAILURE">Inject Signal Failure</button>
+            </div>
+
+            <!-- Scenario 4: Obstruction & Loop Diversion -->
+            <div class="chaos-card" data-incident="CATTLE_OBSTRUCTION">
+              <div class="chaos-card-badge badge-info">DYNAMIC DIVERSION</div>
+              <div class="chaos-card-icon">🐂</div>
+              <h4>Mainline Track Obstruction</h4>
+              <p class="chaos-card-desc">Track blockage reported on UP Main Line. Route Interlocking dynamically re-routes traffic via Middle Loop.</p>
+              <div class="chaos-impact-box">
+                <span class="impact-label">AUTOMATIC KAVACH RESPONSE:</span>
+                <strong>Turnout points aligned to bypass loop. Target speed throttled to Loop PSR 45 km/h. Clean bypass achieved!</strong>
+              </div>
+              <button type="button" class="btn btn-sm btn-primary inject-scenario-btn" data-scenario="CATTLE_OBSTRUCTION">Inject Loop Diversion</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer chaos-footer">
+          <div class="active-status-note">
+            <span id="chaosModalActiveStatus">Status: Mainline Nominal (All Green)</span>
+          </div>
+          <button type="button" id="resetChaosBtn" class="btn btn-outline">Clear All Incidents (All Green)</button>
+          <button type="button" id="closeChaosModalBtn2" class="btn btn-primary">Return to Radar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official Indian Railways Form T/1518 & Form T/409 Modal -->
+    <div id="officialMemoModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="officialMemoTitle">
+      <div class="modal-container modal-lg official-memo-container">
+        <div class="modal-header memo-modal-header">
+          <div class="memo-header-title-wrap">
+            <span class="memo-kicker">MINISTRY OF RAILWAYS · GOVERNMENT OF INDIA</span>
+            <h3 id="officialMemoTitle">Official Statutory Railway Memos & Sanctions</h3>
+          </div>
+          <button id="closeMemoModalBtn" class="modal-close" type="button" aria-label="Close Official Memo">✕</button>
+        </div>
+
+        <div class="memo-tabs-bar">
+          <button type="button" class="memo-tab-btn is-active" id="tabFormT1518" data-tab="t1518">Form T/1518 (Block Sanction Authority)</button>
+          <button type="button" class="memo-tab-btn" id="tabFormT409" data-tab="t409">Form T/409 (Caution Order to Loco Pilot)</button>
+        </div>
+
+        <div class="memo-modal-body" id="memoPrintableArea">
+          <!-- Dynamic Form content rendered by JS -->
+          <div id="memoContentWrap"></div>
+        </div>
+
+        <div class="modal-footer memo-footer">
+          <div class="memo-footer-left">
+            <span class="memo-stamp-indicator">✓ SIL-4 CRYPTOGRAPHICALLY VALIDATED CONTROL OFFICE MEMO</span>
+          </div>
+          <div class="memo-footer-right">
+            <button type="button" id="printMemoBtn" class="btn btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span>Print Official Form</span>
+            </button>
+            <button type="button" id="downloadMemoBtn" class="btn btn-outline">Download HTML</button>
+            <button type="button" id="closeMemoModalBtn2" class="btn btn-secondary">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span class="footer-brand">SthitiShodhana (स्थितिशोधन)</span>
+        <span class="footer-sep">·</span>
+        <span>Autonomous Train Dispatching &amp; Dynamic Maintenance Block Optimizer</span>
+        <span class="footer-sep">·</span>
+        <span>Ministry of Railways Problem Statement SIH26027</span>
+      </div>
+      <div class="footer-right">
+        <span>Team Trailblazer (ID: 15)</span>
+        <span class="footer-sep">·</span>
+        <a href="#resultsSection" class="footer-link">View Optimized Output</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Rail Route Coordinates -->
+  <script src="railRoutes.js"></script>
+  
+  <!-- Main Application Logic -->
+  <script src="app.js?v=20260925_sthitishodhana"></script>
 </body>
 </html>
-

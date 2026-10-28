@@ -1,0 +1,13 @@
+# Vercel Deployment Ignore Rules
+backend/
+frontend/
+backup_original_website/
+sih web manus/
+.git
+.agents
+.gemini
+*.log
+docs/
+scripts/
+node_modules/
+.DS_Store
